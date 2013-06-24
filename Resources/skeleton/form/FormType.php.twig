@@ -1,0 +1,85 @@
+<?php
+
+namespace {{ namespace }}\FormType{{ entity_namespace ? '\\' ~ entity_namespace : '' }};
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+class {{ form_class }} extends AbstractType
+{
+    public function buildForm( FormBuilderInterface $builder, array $options ) {
+
+{% for field in fields %}
+        $builder->add( '{{ field }}'
+            , null
+            , array(
+                'label_attr' => array(
+                    'class' => ''
+                )
+                , 'attr' => array(
+                    'class' => ''
+                )
+            )
+        );
+
+{% endfor %}
+{% for field in mmmaps %}
+        $builder->add( '{{ field }}'
+            , null
+            , array(
+                'by_reference' => false
+                , 'label_attr' => array(
+                    'class' => ''
+                )
+                , 'attr' => array(
+                    'class' => ''
+                )
+            )
+        );
+
+{%- endfor %}
+{% for field in checks %}
+        $builder->add( '{{ field }}'
+            , null
+            , array(
+                'label_attr' => array(
+                    'class' => ''
+                )
+                , 'attr' => array(
+                    'class' => ''
+                )
+                , 'required' => false
+            )
+        );
+
+{% endfor %}
+{% for field in datetimes %}
+        $builder->add( '{{ field }}'
+            , 'datetime'
+            , array( 'widget'   => 'single_text'
+                {% if 'modWhen' == field -%}
+                , 'disabled' => true
+                , 'label' => 'Modified'
+                {%- endif %}
+
+                , 'label_attr' => array(
+                    'class' => ''
+                )
+            )
+        );
+
+{% endfor %}
+
+    }
+
+    public function setDefaultOptions( OptionsResolverInterface $resolver ) {
+        $resolver->setDefaults( array(
+                'data_class' => '{{ namespace }}\Entity{{ entity_namespace ? '\\' ~ entity_namespace : '' }}\{{ entity_class }}'
+            ) );
+    }
+
+    public function getName() {
+        return '{{ form_type_name }}';
+    }
+}

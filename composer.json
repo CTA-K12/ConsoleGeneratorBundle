@@ -1,0 +1,10 @@
+{
+    "name": "mesd/console-generator-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Console Generator bundle",
+    "autoload": {
+        "psr-0": { "MESD\\Console\\GeneratorBundle": "" }
+    },
+    "target-dir": "MESD/Console/GeneratorBundle"
+}

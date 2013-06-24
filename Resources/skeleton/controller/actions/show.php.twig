@@ -1,0 +1,39 @@
+    /**
+     * Displays a disabled form to show an existing {{ entity }} entity.
+     *
+{% if 'annotation' == format %}
+     * @Route("/{id}/edit", name="{{ route_name_prefix }}_edit")
+     * @Method("GET")
+     * @Template()
+{% endif %}
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
+        }
+
+        $showForm = $this->createForm(new {{ entity_class }}Type()
+                                     , $entity
+                                     , array(
+                                        'disabled' => true
+                                        , 'attr' => array()
+                                       )
+                                     );
+
+{% if 'annotation' == format %}
+        return array(
+            'entity'      => $entity,
+            'form'        => $showForm->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:show.html.twig', array(
+            'entity'      => $entity,
+            'form'        => $showForm->createView(),
+        ));
+{% endif %}
+    }

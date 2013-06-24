@@ -1,0 +1,62 @@
+{{"{% extends \"::layout.html.twig\" %}"}}
+
+{{"{% block subtitle %}"}}{{ entity }}{{"{% endblock subtitle %}"}}
+
+{{"{% block body %}"}}
+<h1>{{ entity }} List</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+        {%- for field, metadata in fields %}
+
+            <th>{{ field|capitalize }}</th>
+
+        {%- endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    {{ '{% for entity in entities %}
+        {% if loop.index0 is odd %}
+        <tr class="odd">
+        {% else %}
+        <tr class="even">
+        {% endif %}
+    '}}
+
+    {%- for field, metadata in fields %}
+        {%- if loop.first and ('show' in actions) %}
+
+            <td><a href="{{ "{{ path('"~ route_name_prefix ~"_show', { 'id': entity.id }) }}" }}">{{ '{{ entity.'~ field|replace({'_': ''}) ~' }}' }}</a></td>
+
+        {%- elseif 'password' == field or 'salt' == field %}
+
+           <td>xxxxxxxxxx</td>
+
+        {%- elseif metadata.type in ['date', 'datetime'] %}
+
+            <td>{{ '{% if entity.'~ field|replace({'_': ''}) ~' %}{{ entity.'~ field|replace({'_': ''}) ~'|date(\'m-d-Y H:i:s\') }}{% endif %}' }}</td>
+
+        {%- else %}
+
+            <td>{{ '{{ entity.'~ field|replace({'_': ''}) ~' }}' }}</td>
+
+        {%- endif %}
+
+    {%- endfor %}
+
+        </tr>
+    {{ '{% endfor %}' }}
+    </tbody>
+</table>
+
+{% if 'new' in actions %}
+<ul>
+    <li>
+        <a href="{{ "{{ path('"~ route_name_prefix ~"_new') }}" }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+{% endif %}
+{{"{% endblock body %}"}}
