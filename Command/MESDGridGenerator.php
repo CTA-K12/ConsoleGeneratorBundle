@@ -192,7 +192,7 @@ use APY\DataGridBundle\Grid\Grid;
 <spaces>public function makeGrid($grd){
 <spaces><spaces>$source = new Entity(\'<entityBundleName>\');
 <spaces><spaces>$grd->setSource($source);
-<spaces><spaces>//$grd->setPresistence(true);
+<spaces><spaces>//$grd->setPersistence(true);
 <gridBody>
 <spaces>}
 }
