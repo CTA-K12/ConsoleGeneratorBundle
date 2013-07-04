@@ -211,8 +211,8 @@ use APY\DataGridBundle\Grid\Grid;
 <spaces><spaces>//<spaces>default is ORM type
 <spaces><spaces>//->setAlign(\'left\')
 <spaces><spaces>//options left/right/center
-<spaces><spaces>//->setFilter(\'input\')
-<spaces><spaces>//->setFilter(\'select\')
+<spaces><spaces>//->setFilterType(\'input\')
+<spaces><spaces>//->setFilterType(\'select\')
 <spaces><spaces>//<spaces>Not all column types support filter
 <spaces><spaces>//->setSortable(false)
 <spaces><spaces>->setFilterable(false)
@@ -254,12 +254,12 @@ use APY\DataGridBundle\Grid\Grid;
 <spaces><spaces>//<spaces>default is ORM type
 <spaces><spaces>//->setAlign(\'left\')
 <spaces><spaces>//<spaces>options left/right/center
-<spaces><spaces>//->setFilter(\'input\')
-<spaces><spaces>//->setFilter(\'select\')
+<spaces><spaces>//->setFilterType(\'input\')
+<spaces><spaces>//->setFilterType(\'select\')
 <spaces><spaces>//<spaces>Not all column types support filter
 <spaces><spaces>//->setSortable(false)
 <spaces><spaces>->setFilterable(false)
-<spaces><spaces>//->setVisible(true)
+<spaces><spaces>//->setVisible(false)
 <spaces><spaces>//->setOperators()
 <spaces><spaces>//->setDefaultOperator()
 <spaces><spaces>//<spaces>review documentation
@@ -282,13 +282,14 @@ use APY\DataGridBundle\Grid\Grid;
 '
 <spaces><spaces>$grd->showColumns(array(<ColumnStack>
 <spaces><spaces>));
+<spaces><spaces>// sort as needed
 <spaces><spaces>$grd->setColumnsOrder(array(<ColumnStack>
 <spaces><spaces>));
-<spaces><spaces>// sort as needed
 <spaces><spaces>$grd->setActionsColumnSize(80);
+<spaces><spaces>// List the ones to be hidden here
+<spaces><spaces>// Can also use ->setVisible(false) on each column
 <spaces><spaces>$grd->hideColumns(array(
 <spaces><spaces>));
-<spaces><spaces>// List the ones to be hidden here
 <spaces><spaces>$grd->setPermanentFilters(array());
 <spaces><spaces>$grd->setDefaultFilters(array());
 <spaces><spaces>$grd->setPersistence(true);
