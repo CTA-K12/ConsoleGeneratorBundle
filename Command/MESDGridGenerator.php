@@ -206,9 +206,12 @@ use APY\DataGridBundle\Grid\Grid;
 <spaces><spaces>->setTitle(\'<Column>\')
 <spaces><spaces>//->setSize(-1)
 <spaces><spaces>//<spaces>autosizing default, otherwis set pixels
-<spaces><spaces>//->setType(\'text\')
-<spaces><spaces>//<spaces>text, number, boolean, date, datetime, array
 <spaces><spaces>//<spaces>default is ORM type
+<spaces><spaces>//->setFormat('Y/m/d')
+<spaces><spaces>// date and datetime
+<spaces><spaces>// by default date displays midnight
+<spaces><spaces>// use format above for just date,
+<spaces><spaces>// or change to suit
 <spaces><spaces>//->setAlign(\'left\')
 <spaces><spaces>//options left/right/center
 <spaces><spaces>//->setFilterType(\'input\')
@@ -249,9 +252,6 @@ use APY\DataGridBundle\Grid\Grid;
 <spaces><spaces>$<Column>->setTitle(\'<Column>\')
 <spaces><spaces>//->setSize(-1)
 <spaces><spaces>//<spaces>autosizing default, otherwise set pixels
-<spaces><spaces>//->setType(\'text\')
-<spaces><spaces>//<spaces>text, number, boolean, date, datetime, array
-<spaces><spaces>//<spaces>default is ORM type
 <spaces><spaces>//->setAlign(\'left\')
 <spaces><spaces>//<spaces>options left/right/center
 <spaces><spaces>//->setFilterType(\'input\')
