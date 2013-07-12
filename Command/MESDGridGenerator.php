@@ -311,28 +311,28 @@ use APY\DataGridBundle\Grid\Grid;
 <spaces><spaces>$grd->addExport(new ExcelExport(\'Excel Export\'));
 
 <spaces><spaces>$showAction = new RowAction(\'Show\'
-<spaces><spaces>, \'<entityclassname>_show\'
-<spaces><spaces>, false
-<spaces><spaces>, \'_self\'
-<spaces><spaces>, array(\'class\' => \'\')
+<spaces><spaces><spaces>, \'<entityclassname>_show\'
+<spaces><spaces><spaces>, false
+<spaces><spaces><spaces>, \'_self\'
+<spaces><spaces><spaces>, array(\'class\' => \'btn btn-info action icon-eye-open\')
 <spaces><spaces>);
 <spaces><spaces>$showAction->setRouteParameters(array(\'id\'));
 <spaces><spaces>$grd->addRowAction($showAction);
 
 <spaces><spaces>$editAction = new RowAction(\'Edit\'
-<spaces><spaces>, \'<entityclassname>_edit\'
-<spaces><spaces>, false
-<spaces><spaces>, \'_self\'
-<spaces><spaces>, array(\'class\' => \'\')
+<spaces><spaces><spaces>, \'<entityclassname>_edit\'
+<spaces><spaces><spaces>, false
+<spaces><spaces><spaces>, \'_self\'
+<spaces><spaces><spaces>, array(\'class\' => \'btn btn-info action icon-pencil\')
 <spaces><spaces>);
 <spaces><spaces>$editAction->setRouteParameters(array(\'id\'));
 <spaces><spaces>$grd->addRowAction($editAction);
 
 <spaces><spaces>$deleteAction = new RowAction(\'Delete\'
-<spaces><spaces>, \'<entityclassname>_delete\'
-<spaces><spaces>, false
-<spaces><spaces>, \'_self\'
-<spaces><spaces>, array(\'class\' => \'\')
+<spaces><spaces><spaces>, \'<entityclassname>_delete\'
+<spaces><spaces><spaces>, false
+<spaces><spaces><spaces>, \'_self\'
+<spaces><spaces><spaces>, array(\'class\' => \'btn btn-info action icon-remove\')
 <spaces><spaces>);
 <spaces><spaces>$deleteAction->setRouteParameters(array(\'id\'));
 <spaces><spaces>$grd->addRowAction($deleteAction);
