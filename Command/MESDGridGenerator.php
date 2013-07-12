@@ -219,7 +219,7 @@ use APY\DataGridBundle\Grid\Grid;
 <spaces><spaces>//<spaces>Not all column types support filter
 <spaces><spaces>//->setSortable(false)
 <spaces><spaces>->setFilterable(false)
-<spaces><spaces>//->setVisible(true)
+<spaces><spaces>//->setVisible(false)
 <spaces><spaces>//->setOperators()
 <spaces><spaces>//->setDefaultOperator()
 <spaces><spaces>//<spaces>review documentation
