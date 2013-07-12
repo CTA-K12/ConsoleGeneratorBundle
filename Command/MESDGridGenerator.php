@@ -280,6 +280,19 @@ use APY\DataGridBundle\Grid\Grid;
 
     private static $gridFinal =
 '
+
+<spaces><spaces>$search
+<spaces><spaces>= new Column\TextColumn(
+<spaces><spaces><spaces>array(
+<spaces><spaces><spaces><spaces>\'id\'                 => \'search\'
+<spaces><spaces><spaces><spaces>, \'title\'            => \'Search\'
+<spaces><spaces><spaces><spaces>, \'filter\'           => \'input\'
+<spaces><spaces><spaces><spaces>, \'filterable\'       => true
+<spaces><spaces><spaces><spaces>, \'operatorsVisible\' => false
+<spaces><spaces><spaces><spaces>, \'visible\' => false
+<spaces><spaces><spaces><spaces>)
+<spaces><spaces>);
+<spaces><spaces>$grd->getColumns()->addColumn( $search );
 <spaces><spaces>$grd->showColumns(array(<ColumnStack>
 <spaces><spaces>));
 <spaces><spaces>// sort as needed
