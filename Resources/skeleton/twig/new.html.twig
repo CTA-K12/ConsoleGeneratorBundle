@@ -2,7 +2,16 @@
 
 {{"{% block subtitle %}"}}{{ entity }} Edit (New){{"{% endblock subtitle %}"}}
 
-{{"{% block body %}"}}
+{{"{% block main %}"}}
+{{"
+   {% for flashMessage in app.session.flashbag.get('notice') %}
+        {% if flashMessage is defined %}
+            <div class='flash-notice csuccess'>
+                <h4>{{ flashMessage }}</h4>
+            </div>
+        {% endif %}
+    {% endfor %}
+"}}
 {{ "<span class='c990000 bold error'>" }}
 {{ "{{ form_errors(form) }}" }}
 {{ "</span>" }}
@@ -50,4 +59,4 @@
         <button type='submit' class='btn btn-primary bold'>Save</button>
     </p>
 </form>
-{{"{% endblock body %}"}}
+{{"{% endblock main %"}}

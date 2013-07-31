@@ -2,7 +2,16 @@
 
 {{"{% block subtitle %}"}}{{ entity }}{{"{% endblock subtitle %}"}}
 
-{{"{% block body %}"}}
+{{"{% block main %}"}}
+{{"
+   {% for flashMessage in app.session.flashbag.get('notice') %}
+        {% if flashMessage is defined %}
+            <div class='flash-notice csuccess'>
+                <h4>{{ flashMessage }}</h4>
+            </div>
+        {% endif %}
+    {% endfor %}
+"}}
 <h1>{{ entity }} List</h1>
 
 <table class="records_list">
@@ -59,4 +68,4 @@
     </li>
 </ul>
 {% endif %}
-{{"{% endblock body %}"}}
+{{"{% endblock main %}"}}

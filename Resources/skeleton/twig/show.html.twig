@@ -2,7 +2,16 @@
 
 {{"{% block subtitle %}"}}{{ entity }} Detail{{"{% endblock subtitle %}"}}
 
-{{"{% block body %}"}}
+{{"{% block main %}"}}
+{{"
+   {% for flashMessage in app.session.flashbag.get('notice') %}
+        {% if flashMessage is defined %}
+            <div class='flash-notice csuccess'>
+                <h4>{{ flashMessage }}</h4>
+            </div>
+        {% endif %}
+    {% endfor %}
+"}}
 {{ "<span class='c990000 bold error'>" }}
 {{ "{{ form_errors(form) }}" }}
 {{ "</span>" }}
@@ -50,4 +59,4 @@
 </form>
 {% set hide_edit, hide_delete = true, false %}
 {% include 'others/record_actions.html.twig' %}
-{{"{% endblock body %}"}}
+{{"{% endblock main %}"}}
