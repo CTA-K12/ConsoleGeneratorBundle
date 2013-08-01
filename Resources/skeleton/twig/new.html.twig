@@ -1,61 +1,61 @@
 {{"{% extends \"::layout.html.twig\" %}"}}
-{{"{% set subtitle = '"~entity~" Edit (New)' %}"}}
+{{"{% set subtitle = ""~entity~" Edit (New)" %}"}}
 
 {{"{% block main %}"}}
 {{"
-   {% for flashMessage in app.session.flashbag.get('notice') %}
+   {% for flashMessage in app.session.flashbag.get("notice") %}
         {% if flashMessage is defined %}
-            <div class='flash-notice csuccess'>
+            <div class="flash-notice csuccess">
                 <h4>{{ flashMessage }}</h4>
             </div>
         {% endif %}
     {% endfor %}
 "}}
-{{ "<span class='c990000 bold error'>" }}
+{{ "<div  class="c990000 bold error">" }}
 {{ "{{ form_errors(form) }}" }}
-{{ "</span>" }}
-<form action="{{ "{{ path('"~ route_name_prefix ~"_create') }}" }}" method="post" {{ "{{ form_enctype(form) }}" }}>
-    <div class='span12'>
-        <span class='clear'>
-        </span>
+{{ "</div>" }}
+<form action="{{ "{{ path(""~ route_name_prefix ~"_create") }}" }}" method="post" {{ "{{ form_enctype(form) }}" }}>
+    <div class="span12">
+        <div  class="clear">
+        </div>
 {% for field in fieldnames %}
-{% if field != 'id' %}
-        <span class='span12 clear'>
-            <span class='span2'>
+{% if field != "id" %}
+        <div class="row-fluid">
+            <div  class="span2">
                 {{ "{{form_label(form."}}{{field}}{{") }}"}}
-            </span>
-            <span class='span6'>
+            </div>
+            <div  class="span6">
                 {{ "{{form_widget(form."}}{{field}}{{") }}"}}
-            </span>
-        </span>
+            </div>
+        </div>
 {% endif %}
 {% endfor %}
 {% for field in checks %}
-        <span class='span12 clear'>
-            <span class='span2'>
+        <div class="row-fluid">
+            <div  class="span2">
                 {{ "{{form_label(form."}}{{field}}{{") }}"}}
-            </span>
-            <span class='span6'>
+            </div>
+            <div  class="span6">
                 {{ "{{form_widget(form."}}{{field}}{{") }}"}}
-            </span>
-        </span>
+            </div>
+        </div>
 {% endfor %}
 {% for field in maps %}
-        <span class='span12 clear'>
-            <span class='span2'>
+        <div class="row-fluid">
+            <div  class="span2">
                 {{ "{{form_label(form."}}{{field}}{{") }}"}}
-            </span>
-            <span class='span6'>
+            </div>
+            <div  class="span6">
                 {{ "{{form_widget(form."}}{{field}}{{") }}"}}
-            </span>
-        </span>
+            </div>
+        </div>
 {% endfor %}
     </div>
-    {{ "<span class='span12 clear error hidden'>" }}
+    {{ "<div  class="span12 clear error hidden">" }}
     {{ "{{ form_rest(form) }}" }}
-    {{ "</span>" }}
+    {{ "</div>" }}
     <p>
-        <button type='submit' class='btn btn-primary bold'>Save</button>
+        <button type="submit" class="btn btn-primary bold">Save</button>
     </p>
 </form>
 {{"{% endblock main %"}}
