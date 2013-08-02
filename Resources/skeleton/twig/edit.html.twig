@@ -11,7 +11,7 @@
         {% endif %}
     {% endfor %}
 ' }}
-{{ "<span class='c990000 bold error'>" }}
+{{ "<div class='c990000 bold error'>" }}
 {{ "{{ form_errors(form) }}" }}
 {{ "</div>" }}
 <form action="{{ "{{ path('"~ route_name_prefix ~"_update', { 'id': entity.id }) }}" }}" method="post" {{ "{{ form_enctype(form) }}" }}>
@@ -49,20 +49,16 @@
         </div>
 {% endfor %}
     </div>
-    {{ "<span class='span12 clear error hidden'>" }}
+
+    {{ '<div class="row-fluid error hidden">' }}
     {{ "{{ form_rest(form) }}" }}
     {{ "</div>" }}
     <p>
         <button type="submit" class="btn btn-primary bold">Save</button>
     </p>
 </form>
+    {% set hide_edit, hide_delete = true, false %}
+    {% include 'others/record_actions.html.twig' %}
 
-<div class="row-fluid">
-    <div class="span2"></div>
-    <div class="span6">
-        <br/>
-{% set hide_edit, hide_delete = true, false %}
-{% include 'others/record_actions.html.twig' %}
-    </div>
-</div>
+
 {{"{% endblock main %}"}}

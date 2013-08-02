@@ -1,5 +1,5 @@
 {{"{% extends \"::base.html.twig\" %}"}}
-{{"{% set subtitle = '"~entity~"' %}"}}
+{{"{% set subtitle = '"~entity~" List' %}"}}
 
 {{"{% block main %}"}}
 {{ '
@@ -11,7 +11,6 @@
         {% endif %}
     {% endfor %}
 ' }}
-<h1>{{ entity }} List</h1>
 
 <table class="records_list">
     <thead>
