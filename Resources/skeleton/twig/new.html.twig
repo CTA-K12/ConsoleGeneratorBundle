@@ -22,10 +22,10 @@
 {% if field != "id" %}
         <div class="row-fluid">
             <div  class="span2">
-                {{ '{{form_label(form."}}{{field}}{{") }}' }}
+                {{ '{{form_label(form.'}}{{field}}{{') }}' }}
             </div>
             <div  class="span6">
-                {{ '{{form_widget(form."}}{{field}}{{") }}' }}
+                {{ '{{form_widget(form.'}}{{field}}{{') }}' }}
             </div>
         </div>
 {% endif %}
@@ -33,20 +33,20 @@
 {% for field in checks %}
         <div class="row-fluid">
             <div  class="span2">
-                {{ '{{form_label(form."}}{{field}}{{") }}' }}
+                {{ '{{form_label(form.'}}{{field}}{{') }}' }}
             </div>
             <div  class="span6">
-                {{ '{{form_widget(form."}}{{field}}{{") }}' }}
+                {{ '{{form_widget(form.'}}{{field}}{{') }}' }}
             </div>
         </div>
 {% endfor %}
 {% for field in maps %}
         <div class="row-fluid">
             <div  class="span2">
-                {{ '{{form_label(form."}}{{field}}{{") }}' }}
+                {{ '{{form_label(form.'}}{{field}}{{') }}' }}
             </div>
             <div  class="span6">
-                {{ '{{form_widget(form."}}{{field}}{{") }}' }}
+                {{ '{{form_widget(form.'}}{{field}}{{') }}' }}
             </div>
         </div>
 {% endfor %}
