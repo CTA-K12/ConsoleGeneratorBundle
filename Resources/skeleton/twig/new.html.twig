@@ -16,8 +16,6 @@
 {{ '</div>' }}
 <form action="{{ "{{ path('"~ route_name_prefix ~"_create') }}" }}" method="post" {{ '{{ form_enctype(form) }}' }}>
     <div class="span12">
-        <div  class="clear">
-        </div>
 {% for field in fieldnames %}
 {% if field != "id" %}
         <div class="row-fluid">
@@ -51,7 +49,7 @@
         </div>
 {% endfor %}
     </div>
-    {{ '<div  class="span12 clear error hidden">' }}
+    {{ '<div class="row-fluid error hidden">' }}
     {{ '{{ form_rest(form) }}' }}
     {{ '</div>' }}
     <p>

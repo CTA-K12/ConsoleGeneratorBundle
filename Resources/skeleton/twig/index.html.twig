@@ -1,16 +1,16 @@
-{{"{% extends \"::layout.html.twig\" %}"}}
+{{"{% extends \"::base.html.twig\" %}"}}
 {{"{% set subtitle = '"~entity~"' %}"}}
 
 {{"{% block main %}"}}
-{{"
-   {% for flashMessage in app.session.flashbag.get('notice') %}
+{{ '
+   {% for flashMessage in app.session.flashbag.get("notice") %}
         {% if flashMessage is defined %}
-            <div class='flash-notice csuccess'>
+            <div class="flash-notice csuccess">
                 <h4>{{ flashMessage }}</h4>
             </div>
         {% endif %}
     {% endfor %}
-"}}
+' }}
 <h1>{{ entity }} List</h1>
 
 <table class="records_list">
