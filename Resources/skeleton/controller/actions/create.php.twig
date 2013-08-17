@@ -8,8 +8,7 @@
      * @Template("{{ bundle }}:{{ entity }}:new.html.twig")
 {% endif %}
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity  = new {{ entity_class }}();
         $form = $this->createForm(new {{ entity_class }}Type(), $entity);
         $form->bind($request);

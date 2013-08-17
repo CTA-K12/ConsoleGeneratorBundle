@@ -7,8 +7,7 @@
      * @Method("DELETE")
 {% endif %}
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 

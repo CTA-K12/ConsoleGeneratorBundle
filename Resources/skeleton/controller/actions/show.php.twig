@@ -7,15 +7,10 @@
      * @Template()
 {% endif %}
      */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    public function showAction($id) {
+        $entity = $this->getDoctrine()->getManager()->getRepository('{{ bundle }}:{{ entity }}')->find($id);
+        if (!$entity) { throw $this->createNotFoundException('Unable to find {{ entity }} entity.'); }
 
-        $entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
-        }
 
         $showForm = $this->createForm(new {{ entity_class }}Type()
                                      , $entity

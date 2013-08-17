@@ -8,11 +8,8 @@
      * @Template()
 {% endif %}
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
+    public function indexAction() {
+        $entities = $this->getDoctrine()->getManager()->getRepository('{{ bundle }}:{{ entity }}')->findAll();
 
 {% if 'annotation' == format %}
         return array(
