@@ -11,64 +11,16 @@ class {{ form_class }} extends AbstractType
     public function buildForm( FormBuilderInterface $builder, array $options ) {
 
 {% for field in fields %}
-        $builder->add( '{{ field }}'
-            , null
-            , array(
-                'label_attr' => array(
-                    'class' => ''
-                )
-                , 'attr' => array(
-                    'class' => ''
-                )
-            )
-        );
-
+        $builder->add( '{{ field }}', null );
 {% endfor %}
 {% for field in mmmaps %}
-        $builder->add( '{{ field }}'
-            , null
-            , array(
-                'by_reference' => false
-                , 'label_attr' => array(
-                    'class' => ''
-                )
-                , 'attr' => array(
-                    'class' => ''
-                )
-            )
-        );
-
+        $builder->add( '{{ field }}' , null );
 {%- endfor %}
 {% for field in checks %}
-        $builder->add( '{{ field }}'
-            , null
-            , array(
-                'label_attr' => array(
-                    'class' => ''
-                )
-                , 'attr' => array(
-                    'class' => ''
-                )
-                , 'required' => false
-            )
-        );
-
+        $builder->add( '{{ field }}' , null );
 {% endfor %}
 {% for field in datetimes %}
-        $builder->add( '{{ field }}'
-            , 'datetime'
-            , array( 'widget'   => 'single_text'
-                {% if 'modWhen' == field -%}
-                , 'disabled' => true
-                , 'label' => 'Modified'
-                {%- endif %}
-
-                , 'label_attr' => array(
-                    'class' => ''
-                )
-            )
-        );
-
+        $builder->add( '{{ field }}' , null );
 {% endfor %}
 
     }
