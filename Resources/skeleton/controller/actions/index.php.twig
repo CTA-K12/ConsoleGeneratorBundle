@@ -9,7 +9,8 @@
 {% endif %}
      */
     public function indexAction() {
-        $entities = $this->getDoctrine()->getManager()->getRepository('{{ bundle }}:{{ entity }}')->findAll();
+        $em     = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
 
 {% if 'annotation' == format %}
         return array(
