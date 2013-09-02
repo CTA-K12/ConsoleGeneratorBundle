@@ -15,7 +15,7 @@ class {{ form_class }} extends AbstractType
 {% endfor %}
 {% for field in mmmaps %}
         $builder->add( '{{ field }}' , null );
-{%- endfor %}
+{% endfor %}
 {% for field in checks %}
         $builder->add( '{{ field }}' , null );
 {% endfor %}
