@@ -9,7 +9,7 @@
      * @Template("{{ bundle }}:{{ entity }}:edit.html.twig")
 {% endif %}
      */
-    public function updateAction(Request $request, $id) {
+    public function saveAction(Request $request, $id) {
         $em     = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id);
         if (!$entity) { throw $this->createNotFoundException('Unable to find {{ entity }} entity.'); }
@@ -22,7 +22,7 @@
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('{{ route_name_prefix }}_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('{{ route_name_prefix }}_show', array('id' => $id)));
         }
 
 {% if 'annotation' == format %}

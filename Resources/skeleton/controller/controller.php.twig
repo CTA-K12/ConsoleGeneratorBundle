@@ -44,6 +44,7 @@ class {{ entity_class }}Controller extends Controller
     {%- if 'edit' in actions %}
         {%- include 'controller/actions/edit.php.twig' %}
         {%- include 'controller/actions/update.php.twig' %}
+        {%- include 'controller/actions/save.php.twig' %}
     {%- endif %}
 
     {%- if 'delete' in actions %}

@@ -30,6 +30,11 @@
     pattern:  /{id}/update
     defaults: { _controller: "{{ bundle }}:{{ entity }}:update" }
     requirements: { _method: post|put }
+
+{{ route_name_prefix }}_save:
+    pattern:  /{id}/save
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:save" }
+    requirements: { _method: post|put }
 {% endif %}
 
 {% if 'delete' in actions %}

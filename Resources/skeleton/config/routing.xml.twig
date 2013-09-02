@@ -32,6 +32,11 @@
         <default key="_controller">{{ bundle }}:{{ entity }}:update</default>
         <requirement key="_method">post|put</requirement>
     </route>
+
+    <route id="{{ route_name_prefix }}_save" pattern="/{id}/save">
+        <default key="_controller">{{ bundle }}:{{ entity }}:save</default>
+        <requirement key="_method">post|put</requirement>
+    </route>
 {% endif %}
 
 {% if 'delete' in actions %}
