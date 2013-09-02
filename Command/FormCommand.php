@@ -32,7 +32,7 @@ class FormCommand extends ContainerAwareCommand
             , InputOption::VALUE_NONE
             ,
             "If set, stock skeletons are used even if local skeletons exist.\n".
-            "Custom skeletons go in Resources/skeleton/crud/form/FormType.php.twig\n"
+            "Custom skeletons go in Resources/skeleton/form/FormType.php.twig\n"
         )
         ;
     }
@@ -46,8 +46,8 @@ class FormCommand extends ContainerAwareCommand
         $entityClass = $this->getContainer()->get( 'doctrine' )->getAliasNamespace( $bundle->getName() );
         $entityClass.="\\".$entity;
 
-        $stock=( $input->getOption( 'stock' )?:false );
-        $metadata    = $this->getEntityMetadata( $entityClass );
+        $stock = ( $input->getOption( 'stock' )?:false );
+        $metadata = $this->getEntityMetadata( $entityClass );
         $formGenerator = new MESDFormGenerator ( $this->getContainer()->get( 'filesystem' )
             , $bundle
             , $this->getContainer()->get( 'kernel' )->getBundle( 'MESDConsoleGeneratorBundle' )
