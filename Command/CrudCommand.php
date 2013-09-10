@@ -219,7 +219,7 @@ EOT
         return $prefix;
     }
 
-    protected function getGenerator()
+    protected function getGenerator(BundleInterface $bundle = null)
     {
         if (null === $this->generator) {
             $this->generator = new MESDControllerGenerator($this->getContainer()->get('filesystem'), __DIR__.'/../Resources/skeleton/');
@@ -228,7 +228,7 @@ EOT
         return $this->generator;
     }
 
-    public function setGenerator(MESDControllerGenerator $generator)
+    public function setGenerator(Generator $generator)
     {
         $this->generator = $generator;
     }
