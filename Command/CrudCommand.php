@@ -16,12 +16,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineCrudGenerator;
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineFormGenerator;
 use Sensio\Bundle\GeneratorBundle\Command\Helper\DialogHelper;
 use Sensio\Bundle\GeneratorBundle\Command\Validators;
 use Sensio\Bundle\GeneratorBundle\Manipulator\RoutingManipulator;
 use Sensio\Bundle\GeneratorBundle\Command\GenerateDoctrineCommand;
+use Sensio\Bundle\GeneratorBundle\Generator\Generator;
 
 /**
  * Generates a CRUD for a Doctrine entity.
