@@ -1,0 +1,16 @@
+
+    /**
+     * Updates an existing {{ entity }} entity in the database based
+     * on information passed from the form rendered by editAction
+     *
+{% if 'annotation' == format %}
+     * @Route("/{id}", name="{{ route_name_prefix }}_update")
+     * @Method("PUT")
+     * @Template("{{ bundle }}:{{ entity }}:edit.html.twig")
+{% endif %}
+     */
+    public function updateAction(Request $request, $id) {
+
+        $action=$request->request->get( 'action' );
+        return call_user_func_array( array( $this, $action.'Action' ), array( $request, $id ) );
+    }
