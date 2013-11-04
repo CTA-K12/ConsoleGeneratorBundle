@@ -76,7 +76,7 @@ class MESDControllerGenerator extends Generator
         $this->metadata = $metadata;
         $this->setFormat( $format );
 
-        $this->generateControllerClass();
+        $this->generateControllerClass($overwrite);
 
         // $dir = sprintf('%s/Resources/views/%s', $this->bundle->getPath(), str_replace('\\', '/', $this->entity));
 
@@ -84,8 +84,8 @@ class MESDControllerGenerator extends Generator
         //     $this->filesystem->mkdir($dir, 0777);
         // }
 
-        $this->generateTestClass();
-        $this->generateConfiguration();
+        $this->generateTestClass($overwrite);
+        $this->generateConfiguration($overwrite);
     }
 
     /**
@@ -139,7 +139,7 @@ class MESDControllerGenerator extends Generator
      * Generates the controller class only.
      *
      */
-    private function generateControllerClass() {
+    private function generateControllerClass($forceOverwrite = false) {
         $dir = $this->bundle->getPath();
         $parts = explode( '\\', $this->entity );
         $entityClass = array_pop( $parts );
@@ -163,7 +163,6 @@ class MESDControllerGenerator extends Generator
                 'actions'           => $this->actions,
                 'route_prefix'      => $this->routePrefix,
                 'route_name_prefix' => $this->routeNamePrefix,
-                'dir'               => $this->skeletonDir,
                 'bundle'            => $this->bundle->getName(),
                 'entity'            => $this->entity,
                 'entity_class'      => $entityClass,
@@ -178,24 +177,30 @@ class MESDControllerGenerator extends Generator
      * Generates the functional test class only.
      *
      */
-    private function generateTestClass() {
+    private function generateTestClass($forceOverwrite = false) {
         $parts = explode( '\\', $this->entity );
         $entityClass = array_pop( $parts );
         $entityNamespace = implode( '\\', $parts );
 
         $dir    = $this->bundle->getPath() .'/Tests/Controller';
         $target = $dir .'/'. str_replace( '\\', '/', $entityNamespace ).'/'. $entityClass .'ControllerTest.php';
+
+        if (!$forceOverwrite && file_exists($target)) {
+            throw new \RuntimeException('Unable to generate the test class as it already exists.');
+        }
+
         $this->renderFile(
             'tests/controllerTest.php.twig'
             , $target, array(
-                'route_prefix'      => $this->routePrefix,
-                'route_name_prefix' => $this->routeNamePrefix,
-                'entity'            => $this->entity,
-                'entity_class'      => $entityClass,
-                'namespace'         => $this->bundle->getNamespace(),
-                'entity_namespace'  => $entityNamespace,
-                'actions'           => $this->actions,
-                'dir'               => $this->skeletonDir,
-            ) );
+            'route_prefix'      => $this->routePrefix,
+            'route_name_prefix' => $this->routeNamePrefix,
+            'entity'            => $this->entity,
+            'bundle'            => $this->bundle->getName(),
+            'entity_class'      => $entityClass,
+            'namespace'         => $this->bundle->getNamespace(),
+            'entity_namespace'  => $entityNamespace,
+            'actions'           => $this->actions,
+            'form_type_name'    => strtolower(str_replace('\\', '_', $this->bundle->getNamespace()).($parts ? '_' : '').implode('_', $parts).'_'.$entityClass.'Type'),
+        ));
     }
 }

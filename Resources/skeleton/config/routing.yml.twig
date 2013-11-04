@@ -8,6 +8,8 @@
 {{ route_name_prefix }}_show:
     pattern:  /{id}/show
     defaults: { _controller: "{{ bundle }}:{{ entity }}:show" }
+    requirements:
+        id: \d+
 {% endif %}
 
 {% if 'new' in actions %}
@@ -25,21 +27,29 @@
 {{ route_name_prefix }}_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "{{ bundle }}:{{ entity }}:edit" }
+    requirements:
+        id: \d+
 
 {{ route_name_prefix }}_update:
     pattern:  /{id}/update
     defaults: { _controller: "{{ bundle }}:{{ entity }}:update" }
-    requirements: { _method: post|put }
+    requirements:
+        _method: post|put
+        id: \d+
 
 {{ route_name_prefix }}_save:
     pattern:  /{id}/save
     defaults: { _controller: "{{ bundle }}:{{ entity }}:save" }
-    requirements: { _method: post|put }
+    requirements:
+        _method: post|put
+        id: \d+
 {% endif %}
 
 {% if 'delete' in actions %}
 {{ route_name_prefix }}_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "{{ bundle }}:{{ entity }}:delete" }
-    requirements: { _method: post|delete }
+    requirements:
+        _method: post|delete
+        id: \d+
 {% endif %}

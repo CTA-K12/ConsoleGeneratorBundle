@@ -30,10 +30,17 @@ class MESDFormGenerator extends Generator
     private $classPath;
 
     public function __construct( Filesystem $filesystem, $bundle, $currbundle ) {
-        $this->filesystem = $filesystem;
+        $this->filesystem  = $filesystem;
+        $this->setSkeletonDirs(sprintf( '%s/Resources/skeleton/form/', $currbundle->getPath() ) );
         $this->bundle=$bundle;
-        $this->skeletonDir = sprintf( '%s/Resources/skeleton/form/', $currbundle->getPath() );
     }
+
+    // public function __construct( Filesystem $filesystem, $bundle, $currbundle ) {
+    //     $this->filesystem = $filesystem;
+    //     $this->bundle=$bundle;
+    //     $this->setSkeletonDirs($skeletonDir);
+    //     // $this->skeletonDir = sprintf( '%s/Resources/skeleton/form/', $currbundle->getPath() );
+    // }
 
     public function getClassName() {
         return $this->className;
@@ -112,11 +119,9 @@ class MESDFormGenerator extends Generator
         );
 
         $this->renderFile(
-            $this->skeletonDir
-            , 'FormType.php.twig'
+            'FormType.php.twig'
             , $this->classPath
             , array(
-                'dir'              => $this->skeletonDir,
                 'fields'           => array_diff( $this->
                     getFieldsFromMetadata( $metadata ),
                     array_merge( $mmmaps, $checks, $datetimes ) ),
@@ -134,6 +139,7 @@ class MESDFormGenerator extends Generator
         print_r( ( $this->skeletonDir==str_replace( "FormType.php.twig", "", $skelPath ) )?" custom ":" stock " );
         print_r( "FormType for ".$bundle->getName().":$entityClass\n" );
     }
+
 
     /**
      * Returns an array of fields. Fields can be both column fields and

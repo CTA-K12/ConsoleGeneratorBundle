@@ -49,7 +49,7 @@ class MESDTwigGenerator extends Generator
     // public function __construct(Filesystem $filesystem, $skeletonDir)
     public function __construct( Filesystem $filesystem, $bundle, $currbundle ) {
         $this->filesystem  = $filesystem;
-        $this->skeletonDir = sprintf( '%s/Resources/skeleton/twig/', $currbundle->getPath() );
+        $this->setSkeletonDirs(sprintf( '%s/Resources/skeleton/twig/', $currbundle->getPath() ) );
         $this->bundle=$bundle;
     }
 
@@ -154,8 +154,8 @@ class MESDTwigGenerator extends Generator
      */
     private function generateIndexView( $dir ) {
 
-        $this->renderFile( $this->skeletonDir
-            , 'index.html.twig'
+        $this->renderFile(
+            'index.html.twig'
             , $dir.'/index.html.twig'
             , array(
                 'dir'               => $this->skeletonDir,
@@ -184,8 +184,8 @@ class MESDTwigGenerator extends Generator
                 , function( $string ) {
                     return 'boolean' == $string['type'];
                 } ) );
-        $this->renderFile( $this->skeletonDir
-            , 'show.html.twig'
+        $this->renderFile(
+            'show.html.twig'
             , $dir.'/show.html.twig'
             , array(
                 'dir'                 => $this->skeletonDir
@@ -215,8 +215,8 @@ class MESDTwigGenerator extends Generator
                 , function( $string ) {
                     return 'boolean' == $string['type'];
                 } ) );
-        $this->renderFile( $this->skeletonDir
-            , 'new.html.twig'
+        $this->renderFile(
+            'new.html.twig'
             , $dir.'/new.html.twig'
             , array(
                 'dir'               => $this->skeletonDir,
@@ -246,8 +246,8 @@ class MESDTwigGenerator extends Generator
                 , function( $string ) {
                     return 'boolean' == $string['type'];
                 } ) );
-        $this->renderFile( $this->skeletonDir
-            , 'edit.html.twig'
+        $this->renderFile(
+            'edit.html.twig'
             , $dir.'/edit.html.twig'
             , array(
                 'dir'               => $this->skeletonDir,
