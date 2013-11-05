@@ -110,26 +110,31 @@ EOT
             }
         }
 
+        $ran = array();
+
         $generator = $this->getMESDEntityGenerator();
 
         $backupExisting = !$input->getOption('no-backup');
         $generator->setBackupExisting($backupExisting);
 
         foreach ($metadata->getMetadata() as $m) {
-            if ($backupExisting) {
-                $basename = substr($m->name, strrpos($m->name, '\\') + 1) . 'Test';
-                $output->writeln(sprintf('  > backing up <comment>%s.php</comment> to <comment>%s.php~</comment>', $basename, $basename));
-            }
-            // Getting the metadata for the entity class once more to get the correct path if the namespace has multiple occurrences
-            try {
-                $entityMetadata = $manager->getClassMetadata($m->getName(), $input->getOption('path'));
-            } catch (\RuntimeException $e) {
-                // fall back to the bundle metadata when no entity class could be found
-                $entityMetadata = $metadata;
-            }
+            if (! in_array(substr($m->name, strrpos($m->name, '\\') + 1) . 'Test', $ran)) {
+                $ran[] = substr($m->name, strrpos($m->name, '\\') + 1) . 'Test';
+                if ($backupExisting) {
+                    $basename = substr($m->name, strrpos($m->name, '\\') + 1) . 'Test';
+                    $output->writeln(sprintf('  > backing up <comment>%s.php</comment> to <comment>%s.php~</comment>', $basename, $basename));
+                }
+                // Getting the metadata for the entity class once more to get the correct path if the namespace has multiple occurrences
+                try {
+                    $entityMetadata = $manager->getClassMetadata($m->getName(), $input->getOption('path'));
+                } catch (\RuntimeException $e) {
+                    // fall back to the bundle metadata when no entity class could be found
+                    $entityMetadata = $metadata;
+                }
 
-            $output->writeln(sprintf('  > generating <comment>%s</comment>', str_replace('\Entity\\', '\Tests\Entity\\', $m->name . 'Test')));
-            $generator->generate(array($m), $entityMetadata->getPath());
+                $output->writeln(sprintf('  > generating <comment>%s</comment>', str_replace('\Entity\\', '\Tests\Entity\\', $m->name . 'Test')));
+                $generator->generate(array($m), $entityMetadata->getPath());
+            }
         }
     }
 

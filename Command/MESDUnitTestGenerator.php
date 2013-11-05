@@ -138,6 +138,11 @@ class MESDUnitTestGenerator
     private $fieldVisibility = 'private';
 
     /**
+     * @var array
+     */
+    private $includedEntities = array();
+
+    /**
      * Hash-map for handle types
      *
      * @var array
@@ -165,7 +170,7 @@ class MESDUnitTestGenerator
 
 <testNamespace>
 
-use <entityLN>
+use <entityLN>;
 <includes>
 
 <testClassName> extends \PHPUnit_Framework_TestCase
@@ -205,12 +210,40 @@ public function <methodName>
 <spaces>$<entityLC> = new <entity>();
 <spaces>
 <spaces>//Set the field
-<spaces>$<fEntityLC> = new <fEntity>();
+<spaces>$<fEntityLC> = new <fEntityName>();
 <spaces>$<entityLC>->set<fEntity>($<fEntityLC>);
 <spaces>
 <spaces>//Check that it was set
 <spaces>$this->assertNotNull($<entityLC>->get<fEntity>());
 <spaces>$this->assertInstanceOf(\'<fEntityLN>\', $<entityLC>->get<fEntity>());
+}';
+
+    /**
+     * @var string
+     */
+    private static $testEntityManyToManyGetSetTemplate =
+'/**
+ * Tests <entity>\'s get set functions for <fEntity>
+ */
+public function <methodName>
+{
+<spaces>//Create an instance of <entity>
+<spaces>$<entityLC> = new <entity>();
+<spaces>
+<spaces>//Set the field
+<spaces>$<fEntityLC> = new <fEntityName>();
+<spaces>$<fEntityLC>2 = new <fEntityName>();
+<spaces>$<entityLC>->add<fEntity>($<fEntityLC>);
+<spaces>$<entityLC>->add<fEntity>($<fEntityLC>2);
+<spaces>
+<spaces>//Check that it was set
+<spaces>$this->assertNotNull($<entityLC>->get<fEntity>());
+<spaces>$this->assertInstanceOf(\'<fEntityLN>\', $<entityLC>->get<fEntity>()->toArray()[0]);
+<spaces>$this->assertEquals(2, count($<entityLC>->get<fEntity>()->toArray()));
+<spaces>
+<spaces>//Test remove
+<spaces>$<entityLC>->remove<fEntity>($<fEntityLC>2);
+<spaces>$this->assertEquals(1, count($<entityLC>->get<fEntity>()->toArray()));
 }';
 
     /**
@@ -390,6 +423,7 @@ public function <methodName>
      */
     public function generateTestClass(ClassMetadataInfo $metadata)
     {
+        $this->includedEntities[] = $this->generateEntityPath($metadata);
 
         $placeHolders = array(
             '<testNamespace>',
@@ -423,6 +457,7 @@ public function <methodName>
 
         $inNamespace = false;
         $inClass = false;
+        $inUse = false;
         for ($i = 0; $i < count($tokens); $i++) {
             $token = $tokens[$i];
             if (in_array($token[0], array(T_WHITESPACE, T_COMMENT, T_DOC_COMMENT))) {
@@ -444,7 +479,14 @@ public function <methodName>
                 $this->staticReflection[$lastSeenClass]['methods'] = array();
             }
 
-            if ($token[0] == T_NAMESPACE) {
+            if ($inUse) {
+                if ($token[0] == T_NS_SEPARATOR || $token[0] == T_STRING) {
+                    $includeEntity .= $token[1];
+                } else if (is_string($token) && in_array($token, array(';', '{'))) {
+                    $inUse = false;
+                    $this->includedEntities[] = $includeEntity;
+                }
+            } else if ($token[0] == T_NAMESPACE) {
                 $lastSeenNamespace = "";
                 $inNamespace = true;
             } else if ($token[0] == T_CLASS) {
@@ -457,6 +499,9 @@ public function <methodName>
                 }
             } else if (in_array($token[0], array(T_VAR, T_PUBLIC, T_PRIVATE, T_PROTECTED)) && $tokens[$i+2][0] != T_FUNCTION) {
                 $this->staticReflection[$lastSeenClass]['properties'][] = substr($tokens[$i+2][1], 1);
+            } else if ($token[0] == T_USE) {
+                $inUse = true;
+                $includeEntity = '';
             }
         }
     }
@@ -507,10 +552,13 @@ public function <methodName>
         $currentCode = file_get_contents($path);
 
         $body = $this->generateTestBody($metadata);
+        $includes = $this->generateIncludes($metadata);
         $body = str_replace('<spaces>', $this->spaces, $body);
+        $startClass = stripos($currentCode, 'Class');
         $last = strrpos($currentCode, '}');
 
-        return substr($currentCode, 0, $last) . $body . (strlen($body) > 0 ? "\n" : ''). "}";
+        return substr($currentCode, 0, $startClass) . $includes . (strlen($includes) > 0 ? "\n\n" : '') 
+            . substr($currentCode, $startClass, $last - $startClass) . $body . (strlen($body) > 0 ? "\n" : '') . "}";
     }
 
     /**
@@ -676,7 +724,7 @@ public function <methodName>
 
     private function generateEntityPath(ClassMetadataInfo $metadata)
     {
-        return $metadata->name .';';
+        return $metadata->name;
     }
 
     private function generateTestClassName(ClassMetadataInfo $metadata)
@@ -688,7 +736,10 @@ public function <methodName>
     {
         $lines = array();
         foreach ($metadata->associationMappings as $associationMapping) {
-            $lines[] = 'use ' . $associationMapping['targetEntity'] . ';';
+            if (! in_array($associationMapping['targetEntity'], $this->includedEntities)) {
+                $lines[] = 'use ' . $associationMapping['targetEntity'] . ';';
+                $this->includedEntities[] = $associationMapping['targetEntity'];
+            }
         }
 
         return implode("\n", $lines);
@@ -786,7 +837,13 @@ public function <methodName>
             $type = 'primative';  //Yeah, I know this is wrong looking, but date time is a primative from the db side
         }
         else {
-            $template = self::$testEntityGetSetTemplate;
+            if ($metadata->associationMappings[$fieldName]['type'] == $metadata::MANY_TO_MANY ||
+                    $metadata->associationMappings[$fieldName]['type'] == $metadata::ONE_TO_MANY) {
+                $template = self::$testEntityManyToManyGetSetTemplate;
+            }
+            else {
+                $template = self::$testEntityGetSetTemplate;
+            }
             $type = 'object';
         }
 
@@ -797,7 +854,8 @@ public function <methodName>
                 '<fEntity>'     => ucfirst($fieldName),
                 '<entityLC>'    => lcfirst(substr(strrchr($metadata->name, '\\'), 1)),
                 '<fEntityLC>'   => $fieldName,
-                '<fEntityLN>'   => $this->getType($typeHint)
+                '<fEntityLN>'   => $this->getType($typeHint),
+                '<fEntityName>' => substr(strrchr($this->getType($typeHint), '\\'), 1)
             );
         }
         else {
