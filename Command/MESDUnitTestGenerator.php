@@ -804,11 +804,17 @@ public function <methodName>
 
     private function generateTestStubMethod(ClassMetadataInfo $metadata, $fieldName, $typeHint)
     {
+        //Ignore the id field
         if ($fieldName == 'id') {
             return;
         }
 
-        $methodName = 'testGetSet' . ucfirst($fieldName);
+        $capAfterUS = function ($m) {
+                return strtoupper($m[1]);
+            };
+        $cleanedFieldName = preg_replace_callback('/(?:^|_)([a-z])/', $capAfterUS, $fieldName);
+
+        $methodName = 'testGetSet' . ucfirst($cleanedFieldName);
 
         if ($this->hasMethod($methodName, $metadata)) {
             return;
@@ -851,9 +857,9 @@ public function <methodName>
             $replacements = array(
                 '<methodName>'  => $methodName . '()',
                 '<entity>'      => substr(strrchr($metadata->name, '\\'), 1),
-                '<fEntity>'     => ucfirst($fieldName),
+                '<fEntity>'     => ucfirst($cleanedFieldName),
                 '<entityLC>'    => lcfirst(substr(strrchr($metadata->name, '\\'), 1)),
-                '<fEntityLC>'   => $fieldName,
+                '<fEntityLC>'   => $cleanedFieldName,
                 '<fEntityLN>'   => $this->getType($typeHint),
                 '<fEntityName>' => substr(strrchr($this->getType($typeHint), '\\'), 1)
             );
@@ -862,7 +868,7 @@ public function <methodName>
             $replacements = array(
                 '<methodName>'  => $methodName . '()',
                 '<entity>'      => substr(strrchr($metadata->name, '\\'), 1),
-                '<fName>'       => ucfirst($fieldName),
+                '<fName>'       => ucfirst($cleanedFieldName),
                 '<entityLC>'    => lcfirst(substr(strrchr($metadata->name, '\\'), 1))
             );
         }
