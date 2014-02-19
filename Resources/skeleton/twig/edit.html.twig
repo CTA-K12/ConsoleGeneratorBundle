@@ -3,7 +3,6 @@
 {{ '{% block main %}' }}
 <form  class="form-horizontal" action="{{ "{{ path(\'"~ route_name_prefix ~"_update\', { \'id\': entity.id }) }}" }}" method="post" {{ '{{ form_enctype(form) }}' }}>
 {{ '<div class="c990000 bold error">{{ form_errors(form) }}</div>' }}
-
     {% for field in fieldnames %}
         {% if field != 'id' %}
             {{ '{{ form_row(form.'}}{{field}}{{') }}'}}
