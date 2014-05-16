@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo,
     Doctrine\Common\Util\Inflector,
@@ -44,7 +44,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo,
  * @author  Jonathan Wage <jonwage@gmail.com>
  * @author  Roman Borschel <roman@code-factory.org>
  */
-class MESDEntityGenerator
+class MesdEntityGenerator
 {
     /**
      * Specifies class fields should be protected

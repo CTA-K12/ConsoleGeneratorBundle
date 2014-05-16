@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -224,7 +224,7 @@ EOT
     protected function getGenerator(BundleInterface $bundle = null)
     {
         if (null === $this->generator) {
-            $this->generator = new MESDControllerGenerator($this->getContainer()->get('filesystem'), __DIR__.'/../Resources/skeleton/');
+            $this->generator = new MesdControllerGenerator($this->getContainer()->get('filesystem'), __DIR__.'/../Resources/skeleton/');
         }
 
         return $this->generator;
@@ -247,7 +247,7 @@ EOT
 
     protected function createGenerator( $bundle = null ) {
         if (null === $this->generator) {
-            $this->generator = new MESDCrudGenerator($this->getContainer()->get('filesystem'), __DIR__.'/../Resources/skeleton/');
+            $this->generator = new MesdCrudGenerator($this->getContainer()->get('filesystem'), __DIR__.'/../Resources/skeleton/');
         }
 
         return $this->generator;

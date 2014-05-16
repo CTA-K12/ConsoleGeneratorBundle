@@ -12,7 +12,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,8 +20,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\Bundle\DoctrineBundle\Mapping\DisconnectedMetadataFactory;
-use MESD\Console\GeneratorBundle\Command\MESDRepositoryGenerator;
-use MESD\Console\GeneratorBundle\Command\MESDEntityGenerator;
+use Mesd\Console\GeneratorBundle\Command\MesdRepositoryGenerator;
+use Mesd\Console\GeneratorBundle\Command\MesdEntityGenerator;
 
 /**
  * Generate entity classes from mapping information
@@ -111,12 +111,12 @@ EOT
             }
         }
 
-        $generator = $this->getMESDEntityGenerator();
+        $generator = $this->getMesdEntityGenerator();
 
         $backupExisting = !$input->getOption('no-backup');
         $generator->setBackupExisting($backupExisting);
 
-        $repoGenerator = new MESDRepositoryGenerator();
+        $repoGenerator = new MesdRepositoryGenerator();
         foreach ($metadata->getMetadata() as $m) {
             if ($backupExisting) {
                 $basename = substr($m->name, strrpos($m->name, '\\') + 1);
@@ -141,9 +141,9 @@ EOT
         }
     }
 
-    protected function getMESDEntityGenerator()
+    protected function getMesdEntityGenerator()
     {
-        $entityGenerator = new MESDEntityGenerator();
+        $entityGenerator = new MesdEntityGenerator();
         $entityGenerator->setGenerateAnnotations(false);
         $entityGenerator->setGenerateStubMethods(true);
         $entityGenerator->setRegenerateEntityIfExists(false);

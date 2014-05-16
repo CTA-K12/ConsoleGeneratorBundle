@@ -1,6 +1,6 @@
 <?php
 
-namespace MESD\Console\GeneratorBundle\Tests\Controller;
+namespace Mesd\Console\GeneratorBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

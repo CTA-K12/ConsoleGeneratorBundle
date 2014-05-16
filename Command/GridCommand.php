@@ -12,7 +12,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\Bundle\DoctrineBundle\Mapping\DisconnectedMetadataFactory;
-use MESD\Console\GeneratorBundle\Command\MESDGridGenerator;
+use Mesd\Console\GeneratorBundle\Command\MesdGridGenerator;
 
 /**
  * Generate entity classes from mapping information
@@ -110,7 +110,7 @@ EOT
             }
         }
 
-        $generator = $this->getMESDGridGenerator();
+        $generator = $this->getMesdGridGenerator();
 
         $backupExisting = !$input->getOption('no-backup');
         $generator->setBackupExisting($backupExisting);
@@ -135,9 +135,9 @@ EOT
         }
     }
 
-    protected function getMESDGridGenerator()
+    protected function getMesdGridGenerator()
     {
-        $entityGenerator = new MESDGridGenerator();
+        $entityGenerator = new MesdGridGenerator();
         // $entityGenerator->setGenerateAnnotations(false);
         // $entityGenerator->setGenerateStubMethods(true);
         // $entityGenerator->setRegenerateEntityIfExists(false);

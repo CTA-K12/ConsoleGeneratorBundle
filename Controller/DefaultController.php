@@ -1,6 +1,6 @@
 <?php
 
-namespace MESD\Console\GeneratorBundle\Controller;
+namespace Mesd\Console\GeneratorBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-        return $this->render('MESDConsoleGeneratorBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('MesdConsoleGeneratorBundle:Default:index.html.twig', array('name' => $name));
     }
 }

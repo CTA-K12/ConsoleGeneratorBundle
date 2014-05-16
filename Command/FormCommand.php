@@ -1,5 +1,5 @@
 <?php
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,7 +14,7 @@ class FormCommand extends ContainerAwareCommand
     protected function configure() {
         $this
         ->setName( 'mesd:form' )
-        ->setDescription( 'Write Default MESD formtypes' )
+        ->setDescription( 'Write Default Mesd formtypes' )
         ->addArgument(
             'Entity',
             InputArgument::REQUIRED,
@@ -48,16 +48,16 @@ class FormCommand extends ContainerAwareCommand
 
         $stock = ( $input->getOption( 'stock' )?:false );
         $metadata = $this->getEntityMetadata( $entityClass );
-        $formGenerator = new MESDFormGenerator ( $this->getContainer()->get( 'filesystem' )
+        $formGenerator = new MesdFormGenerator ( $this->getContainer()->get( 'filesystem' )
             , $bundle
-            , $this->getContainer()->get( 'kernel' )->getBundle( 'MESDConsoleGeneratorBundle' )
+            , $this->getContainer()->get( 'kernel' )->getBundle( 'MesdConsoleGeneratorBundle' )
         );
 
         $formGenerator->generate( $bundle, $entity, $metadata[0], $forceOverwrite, $stock );
     }
 
     protected function createGenerator( $bundle = null ) {
-        return new MESDFormGenerator( $this->getContainer()->get( 'filesystem' ) );
+        return new MesdFormGenerator( $this->getContainer()->get( 'filesystem' ) );
     }
 
     protected function getEntityMetadata( $entity ) {

@@ -4,7 +4,7 @@
     "type": "symfony-bundle",
     "description": "Console Generator bundle",
     "autoload": {
-        "psr-0": { "MESD\\Console\\GeneratorBundle": "" }
+        "psr-0": { "Mesd\\Console\\GeneratorBundle": "" }
     },
-    "target-dir": "MESD/Console/GeneratorBundle"
+    "target-dir": "Mesd/Console/GeneratorBundle"
 }

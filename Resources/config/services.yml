@@ -1,5 +1,5 @@
 parameters:
-#    mesd_console_generator.example.class: MESD\Console\GeneratorBundle\Example
+#    mesd_console_generator.example.class: Mesd\Console\GeneratorBundle\Example
 
 services:
 #    mesd_console_generator.example:

@@ -1,5 +1,5 @@
 <?php
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,7 +14,7 @@ class TwigCommand extends ContainerAwareCommand
     protected function configure() {
         $this
         ->setName( 'mesd:twig' )
-        ->setDescription( 'Write Default MESD twigs' )
+        ->setDescription( 'Write Default Mesd twigs' )
         ->addArgument(
             'Entity',
             InputArgument::REQUIRED,
@@ -51,15 +51,15 @@ class TwigCommand extends ContainerAwareCommand
         $entityClass.="\\".$entity;
 
         $metadata    = $this->getEntityMetadata( $entityClass );
-        $twigGenerator = new MESDTwigGenerator ( $this->getContainer()->get( 'filesystem' )
+        $twigGenerator = new MesdTwigGenerator ( $this->getContainer()->get( 'filesystem' )
             , $bundle
-            , $this->getContainer()->get( 'kernel' )->getBundle( 'MESDConsoleGeneratorBundle' )
+            , $this->getContainer()->get( 'kernel' )->getBundle( 'MesdConsoleGeneratorBundle' )
         );
         $twigGenerator->generate( $bundle, $entity, $metadata[0], $format, $forceOverwrite, $stock );
     }
 
     protected function createGenerator( $bundle = null ) {
-        return new MESDTwigGenerator( $this->getContainer()->get( 'filesystem' ) );
+        return new MesdTwigGenerator( $this->getContainer()->get( 'filesystem' ) );
     }
 
     protected function getEntityMetadata( $entity ) {

@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo,
     Doctrine\Common\Util\Inflector,
@@ -44,7 +44,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo,
  * @author  Jonathan Wage <jonwage@gmail.com>
  * @author  Roman Borschel <roman@code-factory.org>
  */
-class MESDUnitTestGenerator
+class MesdUnitTestGenerator
 {
     /**
      * Specifies class fields should be protected
@@ -178,7 +178,7 @@ use <entityLN>;
 <testBody>
 }
 ';
-    
+
     /**
      * @var string
      */
@@ -557,7 +557,7 @@ public function <methodName>
         $startClass = stripos($currentCode, 'Class');
         $last = strrpos($currentCode, '}');
 
-        return substr($currentCode, 0, $startClass) . $includes . (strlen($includes) > 0 ? "\n\n" : '') 
+        return substr($currentCode, 0, $startClass) . $includes . (strlen($includes) > 0 ? "\n\n" : '')
             . substr($currentCode, $startClass, $last - $startClass) . $body . (strlen($body) > 0 ? "\n" : '') . "}";
     }
 
@@ -732,7 +732,7 @@ public function <methodName>
         return 'class ' . $this->getClassName($metadata) . 'Test';
     }
 
-    private function generateIncludes(CLassMetadataInfo $metadata) 
+    private function generateIncludes(CLassMetadataInfo $metadata)
     {
         $lines = array();
         foreach ($metadata->associationMappings as $associationMapping) {
@@ -825,7 +825,7 @@ public function <methodName>
         if ($this->getType($typeHint) == 'string') {
             $template = self::$testStringGetSetTemplate;
             $type = 'primative';
-        } 
+        }
         else if ($this->getType($typeHint) == 'integer') {
             $template = self::$testIntegerGetSetTemplate;
             $type = 'primative';

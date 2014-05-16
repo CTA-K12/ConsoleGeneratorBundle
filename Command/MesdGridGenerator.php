@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo,
     Doctrine\Common\Util\Inflector,
@@ -44,7 +44,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo,
  * @author  Jonathan Wage <jonwage@gmail.com>
  * @author  Roman Borschel <roman@code-factory.org>
  */
-class MESDGridGenerator
+class MesdGridGenerator
 {
     /**
      * Specifies class fields should be protected
@@ -173,7 +173,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\SecurityContext;
 
 use APY\DataGridBundle\Grid\Source\Entity;
-use MESD\DoctrineExtensions\WalkerBundle\Walker\IlikeWalker;
+use Mesd\DoctrineExtensions\WalkerBundle\Walker\IlikeWalker;
 use APY\DataGridBundle\Grid\Export\CSVExport;
 use APY\DataGridBundle\Grid\Export\ExcelExport;
 use APY\DataGridBundle\Grid\Action\RowAction;

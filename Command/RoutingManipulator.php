@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 use Sensio\Bundle\GeneratorBundle\Manipulator\Manipulator;
 
 /**

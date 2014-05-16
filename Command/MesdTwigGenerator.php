@@ -16,7 +16,7 @@
 // April 03, 2013
 //
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
@@ -28,7 +28,7 @@ use Sensio\Bundle\GeneratorBundle\Generator\Generator;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class MESDTwigGenerator extends Generator
+class MesdTwigGenerator extends Generator
 {
     protected $filesystem;
     protected $skeletonDir;

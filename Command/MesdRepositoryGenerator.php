@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -32,7 +32,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author  Jonathan Wage <jonwage@gmail.com>
  * @author  Roman Borschel <roman@code-factory.org>
  */
-class MESDRepositoryGenerator
+class MesdRepositoryGenerator
 {
     protected static $_template =
 '<?php

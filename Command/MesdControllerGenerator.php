@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MESD\Console\GeneratorBundle\Command;
+namespace Mesd\Console\GeneratorBundle\Command;
 
 use Sensio\Bundle\GeneratorBundle\Generator\Generator;
 use Symfony\Component\Filesystem\Filesystem;
@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class MESDControllerGenerator extends Generator
+class MesdControllerGenerator extends Generator
 {
     protected $filesystem;
     protected $skeletonDir;
